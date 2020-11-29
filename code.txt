@@ -1,0 +1,37 @@
+ffmpeg -i in.mov -vf "drawtext=fontfile=/usr/share/fonts/ttf-bitstream-vera/Vera.ttf: x=(w-tw)/2: y=h-(2*lh)-n: fontcolor=white: fontsize=40: box=1: boxcolor=0x00000000@1: text=" -an -y out.mov
+ffmpeg -i input.mp4 -vf "drawtext=fontfile=Arial.ttf: text='%{frame_num}': start_number=0: x=(w-tw)/2: y=h-(2*lh): fontcolor=black: fontsize=20: box=1: boxcolor=white: boxborderw=5" -an -y output.MP4
+ffmpeg -i video.mov -vf "drawtext=fontfile=Arial.ttf: text=%{n}: x=(w-tw)/2: y=h-(2*lh): fontcolor=white: fontsize=20: box=1: boxcolor=0x00000099" -y output.mov
+写帧号			ffmpeg -i D:\ffmpeg\bin\PPTshare.mp4 -vf "drawtext=fontfile=/AvenirLTStd-Light.otf:text=%{n}: start_number=10000: x=10: y=10: fontcolor=black: fontsize=40: box=1: boxborderw=10: boxcolor=white" -y D:\ffmpeg\bin\PPTshare-left-up-font=40.mp4
+
+裁剪视频		ffmpeg -i D:\ffmpeg\bin\2-1.mp4 -filter_complex "crop=w=125:h=50:x=30:y=10" -an -y D:\ffmpeg\bin\2-1-crop.mp4
+
+按时间剪切视频	ffmpeg -y -i D:\ffmpeg\bin\S03E01.mkv -ss 01:08:50 -t 188 D:\ffmpeg\bin\crop.mp4
+
+-y/-n 为全局选项, -y表示直接覆盖已经存在的输出文件， -n表示若某个输出文件已经存在则退出。
+-an 不将音频流写到输出文件中
+
+1、视频过滤器 -vf
+
+2、音频过滤器 -af
+
+3. 文本宽度   -tw
+
+4. 行高	      -lh
+
+ffmpeg -i D:\ffmpeg\bin\SampleVideo.mp4 -vf "drawtext=fontfile=/Windows/Fonts/arial.ttf:text=%{n}: start_number=10000: x=(w-tw)/2: y=h-(2*lh): fontcolor=white: fontsize=20: box=1: boxborderw=4: boxcolor=0x00000099" -y D:\ffmpeg\bin\SampleVideo-4bits-fontsize20.mp4
+ffmpeg -i D:\ffmpeg\bin\SampleVideo.mp4 -vf "drawtext=fontfile=/AvenirLTStd-Light.otf:text=%{n}: start_number=10000: x=(w-tw)/2: y=h-(2*lh): fontcolor=white: fontsize=20: box=1: boxborderw=4: boxcolor=0x00000099" -y D:\ffmpeg\bin\SampleVideo-4bits-fontsize20.mp4
+ffmpeg -i D:\ffmpeg\bin\SampleVideo.mp4 -filter_complex "crop=w=100:h=100:x=100:y=100" -an -y D:\ffmpeg\bin\SampleVideo-crop.mp4
+
+AvenirLTStd-Light.otf
+
+写帧号			ffmpeg -i D:\ffmpeg\bin\PPTshare.mp4 -vf "drawtext=fontfile=/AvenirLTStd-Light.otf:text=%{n}: start_number=10000: x=10: y=10: fontcolor=black: fontsize=40: box=1: boxborderw=10: boxcolor=white" -y D:\ffmpeg\bin\PPTshare-left-up-font=40.mp4
+
+D:\ffmpeg\bin\SampleVideo-left-up-font=40.mp4
+
+裁剪视频		ffmpeg -i D:\ffmpeg\bin\去除头尾\TX_Proftalk_100.mp4 -filter_complex "crop=w=340:h=150:x=0:y=0" -an -y D:\ffmpeg\bin\frame\TX_Proftalk_100.mp4
+
+D:\ffmpeg\bin\SampleVideo.mp4
+
+按时间剪切视频	ffmpeg -y -i D:\ffmpeg\bin\去除头尾\2020_11_25_100.mp4 -ss 00:00:00 -t 15 D:\ffmpeg\bin\test1\2020_11_25_100.mp4
+
+
